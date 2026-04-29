@@ -1,56 +1,218 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BTVN</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Markdown parser -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<title>BTVN</title>
 
-  <!-- Style đẹp hơn -->
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      line-height: 1.7;
-      background: #fafafa;
-    }
+<!-- Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-    h1, h2, h3 {
-      margin-top: 1.5em;
-    }
+<!-- Highlight code -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/github-dark.css">
+<script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/common.min.js"></script>
 
-    pre {
-      background: #2d2d2d;
-      color: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      overflow-x: auto;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    code {
-      background: #eee;
-      padding: 3px 6px;
-      border-radius: 5px;
-    }
-  </style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: #e5e7eb;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: rgba(2,6,23,.9);
+  border-right: 1px solid #1e293b;
+  padding: 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  backdrop-filter: blur(10px);
+}
+
+.sidebar h1 {
+  margin: 0 0 20px;
+  font-size: 22px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #111827;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: .2s;
+  text-align: left;
+}
+
+.sidebar button:hover {
+  background: #1e293b;
+  transform: translateX(4px);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  max-width: 900px;
+  width: 100%;
+  background: rgba(17,24,39,.8);
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 20px 80px rgba(0,0,0,.4);
+  backdrop-filter: blur(10px);
+}
+
+/* Typography */
+h1, h2, h3 {
+  color: #fff;
+  margin-top: 1.5em;
+}
+
+a {
+  color: #60a5fa;
+}
+
+/* Table */
+table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+
+th, td {
+  border: 1px solid #334155;
+  padding: 10px;
+}
+
+th {
+  background: #1e293b;
+}
+
+/* Code */
+pre {
+  background: #020617;
+  padding: 16px;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+code {
+  background: #1e293b;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  opacity: 0.7;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}
+</style>
 </head>
 
 <body>
-  <div id="content">Đang tải Markdown...</div>
 
-  <script>
-    fetch("index.md")
-      .then(res => res.text())
-      .then(md => {
-        document.getElementById("content").innerHTML = marked.parse(md);
-      })
-      .catch(() => {
-        document.getElementById("content").innerHTML = "❌ Không load được index.md";
+<div class="layout">
+
+  <aside class="sidebar">
+    <h1>BTVN</h1>
+
+    <button onclick="go('index.md')">🏠 Trang chủ</button>
+    <button onclick="go('anh.md')">🇬🇧 Tiếng Anh</button>
+    <button onclick="go('toan.md')">➗ Toán</button>
+    <button onclick="go('van.md')">📖 Văn</button>
+
+  </aside>
+
+  <main class="content">
+    <div class="card" id="content">
+      <div class="loading">Đang tải...</div>
+    </div>
+  </main>
+
+</div>
+
+<script>
+
+/* load markdown */
+function loadMD(file) {
+  const el = document.getElementById("content");
+  el.innerHTML = "<div class='loading'>Đang tải...</div>";
+
+  fetch(file)
+    .then(res => {
+      if (!res.ok) throw new Error();
+      return res.text();
+    })
+    .then(md => {
+      el.innerHTML = marked.parse(md);
+
+      document.querySelectorAll("pre code").forEach(block => {
+        hljs.highlightElement(block);
       });
-  </script>
+    })
+    .catch(() => {
+      el.innerHTML = "❌ Không load được " + file;
+    });
+}
+
+/* change URL */
+function go(file) {
+  location.hash = file;
+}
+
+/* handle URL */
+function router() {
+  let file = location.hash.replace("#", "");
+  if (!file) file = "index.md";
+  loadMD(file);
+}
+
+window.addEventListener("hashchange", router);
+router();
+
+</script>
+
 </body>
 </html>
