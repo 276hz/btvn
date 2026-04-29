@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTVN</title>
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Style đẹp hơn -->
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.7;
+      background: #fafafa;
+    }
+
+    h1, h2, h3 {
+      margin-top: 1.5em;
+    }
+
+    pre {
+      background: #2d2d2d;
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      overflow-x: auto;
+    }
+
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="content">Đang tải Markdown...</div>
+
+  <script>
+    fetch("index.md")
+      .then(res => res.text())
+      .then(md => {
+        document.getElementById("content").innerHTML = marked.parse(md);
+      })
+      .catch(() => {
+        document.getElementById("content").innerHTML = "❌ Không load được index.md";
+      });
+  </script>
+</body>
+</html>
