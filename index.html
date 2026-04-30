@@ -656,7 +656,15 @@ if(localStorage.getItem("btvn_focus")==="1"){
   document.body.classList.add("focus");
 }
 
-router();
+document.addEventListener("DOMContentLoaded", function() {
+  alert("Biên soạn bởi Ng Nhật Huy");
+
+  if(localStorage.getItem("btvn_focus")==="1"){
+    document.body.classList.add("focus");
+  }
+
+  router();
+});
 </script>
 
 </body>
