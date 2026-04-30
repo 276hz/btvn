@@ -39,10 +39,27 @@ body::before{
   border-bottom:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(18px);
 }
-.top-inner{max-width:1320px;margin:0 auto}
-.brand{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand h1{margin:0;font-size:30px;color:#fff;letter-spacing:.3px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
+.top-inner{
+  max-width:1320px;
+  margin:0 auto;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand h1{
+  margin:0;
+  font-size:30px;
+  color:#fff;
+  letter-spacing:.3px;
+}
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
 button{
   border:1px solid rgba(255,255,255,.12);
   background:rgba(20,20,20,.9);
@@ -52,9 +69,19 @@ button{
   cursor:pointer;
   font-size:14px;
 }
-button:hover{background:#242424}
-.nav{display:flex;gap:8px;overflow-x:auto;padding:12px 0 4px}
-.nav button{flex:0 0 auto;white-space:nowrap}
+button:hover{
+  background:#242424;
+}
+.nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:12px 0 4px;
+}
+.nav button{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
 .nav button.active{
   background:rgba(255,255,255,.16);
   border-color:rgba(255,255,255,.34);
@@ -90,7 +117,10 @@ button:hover{background:#242424}
   border:1px solid rgba(255,255,255,.08);
   border-radius:20px;
 }
-.toc h2{margin:0 0 12px;font-size:16px}
+.toc h2{
+  margin:0 0 12px;
+  font-size:16px;
+}
 .toc a{
   display:block;
   padding:8px 0;
@@ -99,7 +129,9 @@ button:hover{background:#242424}
   font-size:14px;
   border-bottom:1px solid rgba(255,255,255,.04);
 }
-.toc a:hover{color:#fff}
+.toc a:hover{
+  color:#fff;
+}
 .card{
   min-width:0;
   padding:clamp(17px,3vw,42px);
@@ -118,7 +150,12 @@ button:hover{background:#242424}
   letter-spacing:.5px;
 }
 
-.card h1{margin:0 0 24px;font-size:clamp(32px,5vw,52px);line-height:1.1;color:#fff}
+.card h1{
+  margin:0 0 24px;
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.1;
+  color:#fff;
+}
 .card h2{
   margin-top:38px;
   padding-top:18px;
@@ -126,10 +163,23 @@ button:hover{background:#242424}
   font-size:clamp(23px,3.5vw,34px);
   color:#fff;
 }
-.card h3{margin-top:28px;font-size:clamp(19px,3vw,26px);color:#f1f1f1}
-.card p,.card li{font-size:16px;color:#ddd}
-.card strong{color:#fff}
-.card a{color:#fff;text-decoration:none;border-bottom:1px dashed rgba(255,255,255,.35)}
+.card h3{
+  margin-top:28px;
+  font-size:clamp(19px,3vw,26px);
+  color:#f1f1f1;
+}
+.card p,.card li{
+  font-size:16px;
+  color:#ddd;
+}
+.card strong{
+  color:#fff;
+}
+.card a{
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px dashed rgba(255,255,255,.35);
+}
 .card blockquote{
   margin:22px 0;
   padding:14px 18px;
@@ -147,7 +197,11 @@ button:hover{background:#242424}
   border-radius:16px;
   background:rgba(0,0,0,.25);
 }
-table{width:100%;border-collapse:collapse;table-layout:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:auto;
+}
 th,td{
   padding:13px 15px;
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -157,32 +211,84 @@ th,td{
   overflow-wrap:break-word;
   line-height:1.6;
 }
-th{background:rgba(255,255,255,.08);color:#fff;font-weight:800}
-td{background:rgba(10,10,10,.45);color:#e8e8e8}
-tr:hover td{background:rgba(255,255,255,.045)}
-
-table.table-2{min-width:680px}
-table.table-2 th:nth-child(1),table.table-2 td:nth-child(1){width:50%;font-weight:750}
-table.table-2 th:nth-child(2),table.table-2 td:nth-child(2){width:50%}
-
-table.table-3{min-width:900px}
-table.table-3 th:nth-child(1),table.table-3 td:nth-child(1){
-  width:70px;min-width:70px;max-width:90px;text-align:center;white-space:nowrap;
+th{
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-weight:800;
 }
-table.table-3 th:nth-child(2),table.table-3 td:nth-child(2){
-  width:90px;min-width:90px;max-width:120px;text-align:center;white-space:nowrap;font-weight:800;
+td{
+  background:rgba(10,10,10,.45);
+  color:#e8e8e8;
 }
-table.table-3 th:nth-child(3),table.table-3 td:nth-child(3){
-  min-width:520px;width:auto;text-align:left;overflow-wrap:normal;word-break:normal;
+tr:hover td{
+  background:rgba(255,255,255,.045);
 }
 
-table.table-4{min-width:980px}
-table.table-4 th:nth-child(1),table.table-4 td:nth-child(1){
-  width:70px;min-width:70px;text-align:center;white-space:nowrap;
+table.table-2{
+  min-width:680px;
 }
-table.table-4 th:nth-child(2),table.table-4 td:nth-child(2){min-width:260px;font-weight:750}
-table.table-4 th:nth-child(3),table.table-4 td:nth-child(3){min-width:300px}
-table.table-4 th:nth-child(4),table.table-4 td:nth-child(4){min-width:160px}
+table.table-2 th:nth-child(1),
+table.table-2 td:nth-child(1){
+  width:50%;
+  font-weight:750;
+}
+table.table-2 th:nth-child(2),
+table.table-2 td:nth-child(2){
+  width:50%;
+}
+
+table.table-3{
+  min-width:900px;
+}
+table.table-3 th:nth-child(1),
+table.table-3 td:nth-child(1){
+  width:70px;
+  min-width:70px;
+  max-width:90px;
+  text-align:center;
+  white-space:nowrap;
+}
+table.table-3 th:nth-child(2),
+table.table-3 td:nth-child(2){
+  width:90px;
+  min-width:90px;
+  max-width:120px;
+  text-align:center;
+  white-space:nowrap;
+  font-weight:800;
+}
+table.table-3 th:nth-child(3),
+table.table-3 td:nth-child(3){
+  min-width:520px;
+  width:auto;
+  text-align:left;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+
+table.table-4{
+  min-width:980px;
+}
+table.table-4 th:nth-child(1),
+table.table-4 td:nth-child(1){
+  width:70px;
+  min-width:70px;
+  text-align:center;
+  white-space:nowrap;
+}
+table.table-4 th:nth-child(2),
+table.table-4 td:nth-child(2){
+  min-width:260px;
+  font-weight:750;
+}
+table.table-4 th:nth-child(3),
+table.table-4 td:nth-child(3){
+  min-width:300px;
+}
+table.table-4 th:nth-child(4),
+table.table-4 td:nth-child(4){
+  min-width:160px;
+}
 
 pre{
   overflow:auto;
@@ -191,9 +297,21 @@ pre{
   background:#050505;
   border:1px solid rgba(255,255,255,.09);
 }
-code{background:rgba(255,255,255,.08);padding:3px 7px;border-radius:7px}
-pre code{background:transparent;padding:0}
-mark{background:#fff;color:#000;border-radius:4px;padding:0 2px}
+code{
+  background:rgba(255,255,255,.08);
+  padding:3px 7px;
+  border-radius:7px;
+}
+pre code{
+  background:transparent;
+  padding:0;
+}
+mark{
+  background:#fff;
+  color:#000;
+  border-radius:4px;
+  padding:0 2px;
+}
 
 .float{
   position:fixed;
@@ -203,10 +321,20 @@ mark{background:#fff;color:#000;border-radius:4px;padding:0 2px}
   gap:8px;
   z-index:50;
 }
-.float button{background:rgba(20,20,20,.85);backdrop-filter:blur(14px)}
+.float button{
+  background:rgba(20,20,20,.85);
+  backdrop-filter:blur(14px);
+}
 
-body.focus .topbar,body.focus .toc{display:none}
-body.focus .layout{display:block;max-width:1180px;padding:10px}
+body.focus .topbar,
+body.focus .toc{
+  display:none;
+}
+body.focus .layout{
+  display:block;
+  max-width:1180px;
+  padding:10px;
+}
 
 .error-era{
   min-height:340px;
@@ -221,28 +349,73 @@ body.focus .layout{display:block;max-width:1180px;padding:10px}
   font-size:clamp(42px,8vw,88px);
   letter-spacing:-2px;
 }
-.error-era p{margin:0;color:#aaa;font-size:18px}
+.error-era p{
+  margin:0;
+  color:#aaa;
+  font-size:18px;
+}
 
 @media(max-width:850px){
-  .layout{display:block;padding:10px}
-  .toc{position:relative;top:0;max-height:230px;margin-bottom:10px}
-  .toc.closed{display:none}
-  .card{border-radius:18px;padding:16px}
-  .brand h1{font-size:26px}
-  .card h1{font-size:31px}
-  .card p,.card li{font-size:15.5px}
-  table.table-2{min-width:640px}
-  table.table-3{min-width:860px}
-  table.table-4{min-width:940px}
-  th,td{padding:12px 13px}
-  .float{right:10px;bottom:10px}
+  .layout{
+    display:block;
+    padding:10px;
+  }
+  .toc{
+    position:relative;
+    top:0;
+    max-height:230px;
+    margin-bottom:10px;
+  }
+  .toc.closed{
+    display:none;
+  }
+  .card{
+    border-radius:18px;
+    padding:16px;
+  }
+  .brand h1{
+    font-size:26px;
+  }
+  .card h1{
+    font-size:31px;
+  }
+  .card p,.card li{
+    font-size:15.5px;
+  }
+  table.table-2{
+    min-width:640px;
+  }
+  table.table-3{
+    min-width:860px;
+  }
+  table.table-4{
+    min-width:940px;
+  }
+  th,td{
+    padding:12px 13px;
+  }
+  .float{
+    right:10px;
+    bottom:10px;
+  }
 }
 
 @media(max-height:520px) and (orientation:landscape){
-  .topbar{position:relative!important;padding:8px 12px}
-  .toc{display:none}
-  .layout{display:block;padding:8px 12px 26px}
-  .card{padding:18px 22px;border-radius:16px}
+  .topbar{
+    position:relative!important;
+    padding:8px 12px;
+  }
+  .toc{
+    display:none;
+  }
+  .layout{
+    display:block;
+    padding:8px 12px 26px;
+  }
+  .card{
+    padding:18px 22px;
+    border-radius:16px;
+  }
 }
 </style>
 </head>
@@ -274,13 +447,13 @@ body.focus .layout{display:block;max-width:1180px;padding:10px}
 
 <div class="layout">
   <aside class="toc" id="toc">
-    <h2>404</h2>
-    <div id="tocList">404</div>
+    <h2>hehe</h2>
+    <div id="tocList">hihi</div>
   </aside>
 
   <main>
     <article class="card" id="content">
-      <div class="loading">404</div>
+      <div class="loading">hoho</div>
     </article>
   </main>
 </div>
@@ -434,12 +607,12 @@ function loadMD(file){
   setActive(file);
 
   const el=document.getElementById("content");
-  el.innerHTML="<div class='loading'>404</div>";
-  document.getElementById("tocList").innerHTML="404";
+  el.innerHTML="<div class='loading'>404-new era</div>";
+  document.getElementById("tocList").innerHTML="404-new era";
 
   fetch(file)
     .then(res=>{
-      if(!res.ok) throw new Error("404");
+      if(!res.ok) throw new Error("404-new era");
       return res.text();
     })
     .then(md=>{
@@ -457,36 +630,33 @@ function loadMD(file){
       rawHTML="";
       el.innerHTML=`
         <div class="error-era">
-          <h1>404</h1>
-          <p>404</p>
+          <h1>404-new era</h1>
+          <p>404-new era</p>
         </div>
       `;
-      document.getElementById("tocList").innerHTML="404";
+      document.getElementById("tocList").innerHTML="404-new era";
     });
 }
+
 function router(){
-  let file = decodeURIComponent(location.hash.replace("#",""));
+  let file=decodeURIComponent(location.hash.replace("#",""));
   if(!file){
-    file = localStorage.getItem("btvn_file") || "index.md";
-    location.hash = file;
+    file=localStorage.getItem("btvn_file") || "index.md";
+    location.hash=file;
     return;
   }
   loadMD(file);
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("btvn_focus") === "1") {
-    document.body.classList.add("focus");
-  }
+window.addEventListener("scroll",saveProgress);
+window.addEventListener("beforeunload",saveProgress);
+window.addEventListener("hashchange",router);
 
-  router();
+if(localStorage.getItem("btvn_focus")==="1"){
+  document.body.classList.add("focus");
+}
 
-
-
-window.addEventListener("scroll", saveProgress);
-window.addEventListener("beforeunload", saveProgress);
-window.addEventListener("hashchange", router);
-
+router();
 </script>
 
 </body>
