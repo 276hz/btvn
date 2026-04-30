@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>BTVN</title>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -11,410 +11,295 @@
 
 <style>
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
-
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:#050505;
-  color:#f2f2f2;
+  color:#eee;
   line-height:1.65;
   overflow-x:hidden;
 }
-
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(circle at 20% 0%,rgba(255,255,255,.08),transparent 32%),
-    radial-gradient(circle at 90% 10%,rgba(255,255,255,.04),transparent 35%),
-    linear-gradient(180deg,#070707,#020202);
-}
-
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
   z-index:-1;
-  pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-  background-size:48px 48px;
-  mask-image:linear-gradient(to bottom,black,transparent 80%);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.08),transparent 30%),
+    radial-gradient(circle at 90% 10%,rgba(255,255,255,.04),transparent 35%),
+    linear-gradient(180deg,#080808,#020202);
 }
 
-/* HEADER */
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:50;
-  padding:max(14px,env(safe-area-inset-top)) 16px 12px;
-  background:rgba(5,5,5,.84);
+  position:relative;
+  z-index:20;
+  padding:14px 14px 10px;
+  background:rgba(5,5,5,.88);
   border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(22px);
+  backdrop-filter:blur(18px);
 }
-
-.topbar-inner{
-  max-width:1180px;
+.top-inner{
+  max-width:1280px;
   margin:0 auto;
 }
-
-.brand-row{
+.brand{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:14px;
+  justify-content:space-between;
+  gap:12px;
 }
-
 .brand h1{
   margin:0;
-  font-size:clamp(28px,5vw,42px);
+  font-size:30px;
   color:#fff;
-  letter-spacing:.4px;
 }
-
-.brand p{
-  margin:4px 0 0;
-  font-size:13px;
-  color:#888;
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
 }
-
-.menu-toggle{
-  display:none;
+button{
   border:1px solid rgba(255,255,255,.12);
   background:rgba(20,20,20,.9);
-  color:#fff;
+  color:#eee;
   border-radius:999px;
-  padding:10px 14px;
-  font-size:15px;
+  padding:9px 13px;
   cursor:pointer;
 }
+button:hover{background:#222}
 
-/* NAV */
 .nav{
-  margin-top:18px;
   display:flex;
-  gap:10px;
+  gap:8px;
   overflow-x:auto;
-  padding-bottom:6px;
-  scroll-snap-type:x mandatory;
+  padding:12px 0 4px;
 }
-
-.nav::-webkit-scrollbar{height:5px}
-.nav::-webkit-scrollbar-thumb{
-  background:#333;
-  border-radius:999px;
-}
-
 .nav button{
   flex:0 0 auto;
-  scroll-snap-align:start;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:999px;
-  padding:12px 18px;
-  background:rgba(18,18,18,.82);
-  color:#ddd;
-  font-size:15px;
-  cursor:pointer;
-  transition:.2s ease;
   white-space:nowrap;
 }
-
-.nav button:hover{
-  background:rgba(35,35,35,.95);
-  border-color:rgba(255,255,255,.22);
-}
-
 .nav button.active{
-  background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.06));
-  border-color:rgba(255,255,255,.35);
+  background:rgba(255,255,255,.16);
+  border-color:rgba(255,255,255,.32);
   color:#fff;
 }
 
-/* MAIN */
-.main{
+.search{
   width:100%;
-  padding:clamp(12px,3vw,34px);
+  margin-top:10px;
+}
+.search input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0d0d0d;
+  color:#fff;
+  outline:none;
 }
 
-.card{
-  max-width:1160px;
+.layout{
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  gap:18px;
+  max-width:1280px;
   margin:0 auto;
-  padding:clamp(18px,4vw,42px);
+  padding:18px;
+}
+
+.toc{
+  position:sticky;
+  top:12px;
+  align-self:start;
+  max-height:calc(100vh - 24px);
+  overflow:auto;
+  padding:16px;
   background:rgba(12,12,12,.78);
   border:1px solid rgba(255,255,255,.08);
-  border-radius:clamp(18px,3vw,30px);
-  box-shadow:0 30px 100px rgba(0,0,0,.62);
-  backdrop-filter:blur(18px);
+  border-radius:20px;
+}
+.toc h2{
+  margin:0 0 12px;
+  font-size:16px;
+  color:#fff;
+}
+.toc a{
+  display:block;
+  padding:8px 0;
+  color:#aaa;
+  text-decoration:none;
+  font-size:14px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+.toc a:hover{color:#fff}
+
+.card{
+  min-width:0;
+  padding:clamp(17px,3vw,40px);
+  background:rgba(12,12,12,.78);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:24px;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
 }
 
 .loading{
   min-height:220px;
   display:grid;
   place-items:center;
-  color:#999;
+  color:#888;
 }
 
-/* MARKDOWN */
 .card h1{
   margin:0 0 24px;
-  font-size:clamp(34px,6vw,56px);
-  line-height:1.08;
-  letter-spacing:-.8px;
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.1;
   color:#fff;
 }
-
 .card h2{
   margin-top:38px;
   padding-top:18px;
   border-top:1px solid rgba(255,255,255,.08);
-  font-size:clamp(24px,4vw,34px);
-  color:#f5f5f5;
+  font-size:clamp(23px,3.5vw,34px);
+  color:#fff;
 }
-
 .card h3{
   margin-top:28px;
-  font-size:clamp(20px,3vw,26px);
-  color:#eee;
+  font-size:clamp(19px,3vw,26px);
+  color:#f1f1f1;
 }
-
 .card p,.card li{
-  font-size:clamp(16px,2.1vw,18px);
-  color:#d8d8d8;
+  font-size:16px;
+  color:#ddd;
 }
-
-.card strong{color:#fff}
-
 .card a{
   color:#fff;
   text-decoration:none;
   border-bottom:1px dashed rgba(255,255,255,.35);
 }
+.card strong{color:#fff}
 
-.card blockquote{
-  margin:22px 0;
-  padding:14px 18px;
-  border-left:4px solid rgba(255,255,255,.35);
-  background:rgba(255,255,255,.045);
-  border-radius:14px;
-  color:#d0d0d0;
-}
-
-/* TABLE */
 .table-wrap{
   width:100%;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   margin:22px 0;
   border:1px solid rgba(255,255,255,.09);
-  border-radius:18px;
+  border-radius:16px;
   background:rgba(0,0,0,.25);
 }
-
 table{
   width:100%;
-  min-width:680px;
+  min-width:720px;
   border-collapse:collapse;
 }
-
 th,td{
-  padding:15px 18px;
-  border-bottom:1px solid rgba(255,255,255,.09);
+  padding:13px 15px;
+  border-bottom:1px solid rgba(255,255,255,.08);
   vertical-align:top;
 }
-
 th{
-  background:rgba(255,255,255,.075);
+  background:rgba(255,255,255,.08);
   color:#fff;
-  font-weight:800;
 }
-
 td{
   background:rgba(10,10,10,.45);
   color:#e8e8e8;
   word-break:break-word;
 }
-
 th:nth-child(1),td:nth-child(1){
   width:50%;
-  font-weight:750;
+  font-weight:700;
 }
+th:nth-child(2),td:nth-child(2){width:50%}
+tr:hover td{background:rgba(255,255,255,.045)}
 
-th:nth-child(2),td:nth-child(2){
-  width:50%;
-}
-
-tr:hover td{
-  background:rgba(255,255,255,.045);
-}
-
-/* CODE */
 pre{
-  max-width:100%;
-  overflow-x:auto;
-  padding:18px;
-  border-radius:18px;
+  overflow:auto;
+  padding:16px;
+  border-radius:16px;
   background:#050505;
   border:1px solid rgba(255,255,255,.09);
 }
-
-pre code{
-  background:transparent;
-  padding:0;
-}
-
 code{
   background:rgba(255,255,255,.08);
-  color:#fff;
   padding:3px 7px;
   border-radius:7px;
 }
+pre code{background:transparent;padding:0}
 
-img{
-  max-width:100%;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.08);
+mark{
+  background:#facc15;
+  color:#000;
+  border-radius:4px;
+  padding:0 2px;
 }
 
-/* FLOAT */
-.float-actions{
+.float{
   position:fixed;
-  right:16px;
-  bottom:16px;
-  z-index:80;
+  right:14px;
+  bottom:14px;
   display:flex;
   gap:8px;
+  z-index:50;
 }
-
-.float-actions button{
-  border:1px solid rgba(255,255,255,.12);
+.float button{
   background:rgba(20,20,20,.85);
   backdrop-filter:blur(14px);
-  color:#fff;
-  border-radius:999px;
-  padding:11px 14px;
-  cursor:pointer;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar{
-  width:8px;
-  height:8px;
+body.focus .topbar,
+body.focus .toc{
+  display:none;
+}
+body.focus .layout{
+  display:block;
+  max-width:1100px;
+  padding:10px;
 }
 
-::-webkit-scrollbar-track{background:#050505}
-
-::-webkit-scrollbar-thumb{
-  background:#303030;
-  border-radius:999px;
-}
-
-/* MOBILE */
-@media(max-width:720px){
-  .topbar{
-    position:relative;
-  }
-
-  .brand h1{
-    font-size:30px;
-  }
-
-  .brand p{
-    display:none;
-  }
-
-  .menu-toggle{
-    display:inline-flex;
-  }
-
-  .nav{
-    display:none;
-    margin-top:14px;
-  }
-
-  .nav.open{
-    display:flex;
-  }
-
-  .main{
+@media(max-width:850px){
+  .layout{
+    display:block;
     padding:10px;
   }
-
+  .toc{
+    position:relative;
+    top:0;
+    max-height:220px;
+    margin-bottom:10px;
+  }
+  .toc.closed{
+    display:none;
+  }
   .card{
-    padding:17px;
     border-radius:18px;
+    padding:16px;
   }
-
-  .card h1{
-    font-size:31px;
-  }
-
-  .card p,.card li{
-    font-size:15.5px;
-  }
-
   table{
-    min-width:640px;
+    min-width:680px;
   }
-
-  th,td{
-    padding:12px 14px;
-  }
-}
-
-/* LANDSCAPE PHONE */
-@media(max-height:520px) and (orientation:landscape){
-  .topbar{
-    position:relative!important;
-    padding:10px 14px;
-  }
-
   .brand h1{
     font-size:26px;
   }
+}
 
-  .brand p{
+@media(max-height:520px) and (orientation:landscape){
+  .topbar{
+    position:relative!important;
+    padding:8px 12px;
+  }
+  .toc{
     display:none;
   }
-
-  .nav{
-    margin-top:10px;
+  .layout{
+    display:block;
+    padding:8px 12px 26px;
   }
-
-  .nav button{
-    padding:9px 14px;
-    font-size:14px;
-  }
-
-  .main{
-    padding:8px 12px 28px;
-  }
-
   .card{
     padding:18px 22px;
     border-radius:16px;
   }
-
-  .card h1{
-    font-size:30px;
-  }
-}
-
-/* FOCUS MODE */
-body.focus .topbar{
-  display:none;
-}
-
-body.focus .main{
-  padding-top:10px;
-}
-
-body.focus .float-actions .focus-btn{
-  background:rgba(255,255,255,.18);
 }
 </style>
 </head>
@@ -422,56 +307,67 @@ body.focus .float-actions .focus-btn{
 <body>
 
 <header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand-row">
-      <div class="brand">
-        <h1>BTVN</h1>
-        <p>Kho Markdown</p>
+  <div class="top-inner">
+    <div class="brand">
+      <h1>BTVN</h1>
+      <div class="actions">
+        <button onclick="toggleToc()">Mục lục</button>
+        <button onclick="toggleFocus()">Focus</button>
       </div>
-
-      <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     </div>
 
-    <nav class="nav" id="nav">
-      <button onclick="go('index.md')" data-file="index.md">Trang chủ</button>
-      <button onclick="go('anh.md')" data-file="anh.md">Tiếng Anh</button>
-      <button onclick="go('toan.md')" data-file="toan.md">Toán</button>
-      <button onclick="go('van.md')" data-file="van.md">Văn</button>
-      <button onclick="go('sinh.md')" data-file="sinh.md">Sinh</button>
-      <button onclick="go('ly.md')" data-file="ly.md">Lý</button>
-      <button onclick="go('hoa.md')" data-file="hoa.md">Hóa</button>
+    <nav class="nav">
+      <button data-file="index.md" onclick="go('index.md')">Trang chủ</button>
+      <button data-file="anh.md" onclick="go('anh.md')">Tiếng Anh</button>
+      <button data-file="toan.md" onclick="go('toan.md')">Toán</button>
+      <button data-file="van.md" onclick="go('van.md')">Văn</button>
     </nav>
+
+    <div class="search">
+      <input id="searchBox" placeholder="Tìm nhanh trong bài..." oninput="searchText(this.value)">
+    </div>
   </div>
 </header>
 
-<main class="main">
-  <article class="card" id="content">
-    <div class="loading">Đang tải...</div>
-  </article>
-</main>
+<div class="layout">
+  <aside class="toc" id="toc">
+    <h2>Mục lục</h2>
+    <div id="tocList">Đang tải...</div>
+  </aside>
 
-<div class="float-actions">
+  <main>
+    <article class="card" id="content">
+      <div class="loading">Đang tải...</div>
+    </article>
+  </main>
+</div>
+
+<div class="float">
   <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-  <button class="focus-btn" onclick="toggleFocus()">Focus</button>
+  <button onclick="saveNow()">Lưu chỗ</button>
 </div>
 
 <script>
-marked.setOptions({
-  breaks:true,
-  gfm:true
-});
+marked.setOptions({ breaks:true, gfm:true });
 
 let currentFile = "index.md";
-let restoring = false;
+let rawHTML = "";
 let saveTimer = null;
+let restored = false;
 
-function toggleMenu(){
-  document.getElementById("nav").classList.toggle("open");
+function slugify(text){
+  return text
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^\w\s-]/g,"")
+    .trim()
+    .replace(/\s+/g,"-");
 }
 
-function toggleFocus(){
-  document.body.classList.toggle("focus");
-  localStorage.setItem("btvn_focus", document.body.classList.contains("focus") ? "1" : "0");
+function go(file){
+  currentFile = file;
+  localStorage.setItem("btvn_file", file);
+  location.hash = file;
 }
 
 function setActive(file){
@@ -480,29 +376,59 @@ function setActive(file){
   });
 }
 
-function normalizeTables(){
+function toggleToc(){
+  document.getElementById("toc").classList.toggle("closed");
+}
+
+function toggleFocus(){
+  document.body.classList.toggle("focus");
+  localStorage.setItem("btvn_focus", document.body.classList.contains("focus") ? "1" : "0");
+}
+
+function wrapTables(){
   document.querySelectorAll("#content table").forEach(table=>{
-    const rows=[...table.querySelectorAll("tr")];
-    let max=0;
+    const rows = [...table.querySelectorAll("tr")];
+    let max = 0;
+
+    rows.forEach(row => max = Math.max(max, row.children.length));
 
     rows.forEach(row=>{
-      max=Math.max(max,row.children.length);
-    });
-
-    rows.forEach(row=>{
-      while(row.children.length<max){
-        const cell=document.createElement("td");
-        cell.innerHTML="";
-        row.appendChild(cell);
+      while(row.children.length < max){
+        const td = document.createElement("td");
+        td.innerHTML = "";
+        row.appendChild(td);
       }
     });
 
     if(!table.parentElement.classList.contains("table-wrap")){
-      const wrap=document.createElement("div");
-      wrap.className="table-wrap";
-      table.parentNode.insertBefore(wrap,table);
+      const wrap = document.createElement("div");
+      wrap.className = "table-wrap";
+      table.parentNode.insertBefore(wrap, table);
       wrap.appendChild(table);
     }
+  });
+}
+
+function buildToc(){
+  const toc = document.getElementById("tocList");
+  const headings = document.querySelectorAll("#content h1, #content h2, #content h3");
+
+  if(!headings.length){
+    toc.innerHTML = "<span style='color:#777'>Không có mục lục</span>";
+    return;
+  }
+
+  toc.innerHTML = "";
+
+  headings.forEach((h, i)=>{
+    const id = slugify(h.textContent) || "heading-" + i;
+    h.id = id;
+
+    const a = document.createElement("a");
+    a.href = "#" + id;
+    a.textContent = h.textContent;
+    a.style.paddingLeft = h.tagName === "H3" ? "18px" : h.tagName === "H2" ? "8px" : "0";
+    toc.appendChild(a);
   });
 }
 
@@ -513,101 +439,102 @@ function highlightCode(){
 }
 
 function saveProgress(){
-  if(restoring) return;
-
   clearTimeout(saveTimer);
-  saveTimer=setTimeout(()=>{
-    localStorage.setItem("btvn_file",currentFile);
-    localStorage.setItem("btvn_scroll",String(window.scrollY));
+  saveTimer = setTimeout(()=>{
+    localStorage.setItem("btvn_file", currentFile);
+    localStorage.setItem("btvn_scroll_" + currentFile, String(window.scrollY));
   },120);
 }
 
-function restoreProgress(){
-  const savedFile=localStorage.getItem("btvn_file");
-  const savedScroll=Number(localStorage.getItem("btvn_scroll") || 0);
-  const focus=localStorage.getItem("btvn_focus");
+function saveNow(){
+  localStorage.setItem("btvn_file", currentFile);
+  localStorage.setItem("btvn_scroll_" + currentFile, String(window.scrollY));
+  alert("Đã lưu chỗ đang đọc.");
+}
 
-  if(focus==="1"){
-    document.body.classList.add("focus");
+function restoreScroll(file){
+  const y = Number(localStorage.getItem("btvn_scroll_" + file) || 0);
+  if(y > 0){
+    setTimeout(()=>window.scrollTo(0,y),300);
+  }else{
+    window.scrollTo(0,0);
   }
+}
 
-  if(savedFile && !location.hash){
-    location.hash=savedFile;
+function searchText(q){
+  const content = document.getElementById("content");
+
+  if(!rawHTML) return;
+
+  if(!q.trim()){
+    content.innerHTML = rawHTML;
+    wrapTables();
+    buildToc();
+    highlightCode();
     return;
   }
 
-  if(savedScroll>0){
-    restoring=true;
-    setTimeout(()=>{
-      window.scrollTo(0,savedScroll);
-      setTimeout(()=>restoring=false,300);
-    },350);
-  }
+  const safe = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const reg = new RegExp(safe, "gi");
+
+  content.innerHTML = rawHTML.replace(reg, match => `<mark>${match}</mark>`);
+  wrapTables();
+  buildToc();
 }
 
 function loadMD(file){
-  currentFile=file;
+  currentFile = file;
   setActive(file);
 
-  const el=document.getElementById("content");
-  el.innerHTML="<div class='loading'>Đang tải...</div>";
+  const el = document.getElementById("content");
+  el.innerHTML = "<div class='loading'>Đang tải...</div>";
+  document.getElementById("tocList").innerHTML = "Đang tải...";
 
   fetch(file)
     .then(res=>{
-      if(!res.ok) throw new Error("File not found");
+      if(!res.ok) throw new Error("Không thấy file");
       return res.text();
     })
     .then(md=>{
-      el.innerHTML=marked.parse(md);
-      normalizeTables();
+      rawHTML = marked.parse(md);
+      el.innerHTML = rawHTML;
+
+      wrapTables();
+      buildToc();
       highlightCode();
 
-      if(window.innerWidth<=720){
-        document.getElementById("nav").classList.remove("open");
-      }
-
-      localStorage.setItem("btvn_file",currentFile);
-
-      const savedFile=localStorage.getItem("btvn_file");
-      const savedScroll=Number(localStorage.getItem("btvn_scroll") || 0);
-
-      if(savedFile===currentFile && savedScroll>0){
-        restoring=true;
-        setTimeout(()=>{
-          window.scrollTo(0,savedScroll);
-          setTimeout(()=>restoring=false,300);
-        },250);
-      }else{
-        window.scrollTo({top:0,behavior:"smooth"});
-      }
+      localStorage.setItem("btvn_file", file);
+      restoreScroll(file);
     })
     .catch(()=>{
-      el.innerHTML=`
+      rawHTML = "";
+      el.innerHTML = `
         <h1>Không load được file</h1>
         <p>Chưa tìm thấy file: <code>${file}</code></p>
-        <p>Hãy tạo file này trong repo GitHub.</p>
+        <p>Hãy kiểm tra tên file trong GitHub repo.</p>
       `;
+      document.getElementById("tocList").innerHTML = "Không có";
     });
 }
 
-function go(file){
-  if(currentFile!==file){
-    localStorage.setItem("btvn_scroll","0");
-  }
-  location.hash=file;
-}
-
 function router(){
-  let file=decodeURIComponent(location.hash.replace("#",""));
-  if(!file) file="index.md";
+  let file = decodeURIComponent(location.hash.replace("#",""));
+  if(!file){
+    file = localStorage.getItem("btvn_file") || "index.md";
+    location.hash = file;
+    return;
+  }
   loadMD(file);
 }
 
-window.addEventListener("scroll",saveProgress);
-window.addEventListener("beforeunload",saveProgress);
-window.addEventListener("hashchange",router);
+window.addEventListener("scroll", saveProgress);
+window.addEventListener("beforeunload", saveProgress);
+window.addEventListener("hashchange", router);
 
-restoreProgress();
+if(localStorage.getItem("btvn_focus")==="1"){
+  document.body.classList.add("focus");
+}
+
 router();
 </script>
 
