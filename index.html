@@ -1,252 +1,614 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>BTVN</title>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/npm/highlight.js/lib/common.min.js"></script>
 
 <style>
 *{box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
   margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   background:#050505;
   color:#f2f2f2;
-  line-height:1.7;
+  line-height:1.65;
+  overflow-x:hidden;
 }
 
-/* layout */
-.layout{
-  display:flex;
-  min-height:100vh;
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.08),transparent 32%),
+    radial-gradient(circle at 90% 10%,rgba(255,255,255,.04),transparent 35%),
+    linear-gradient(180deg,#070707,#020202);
 }
 
-/* sidebar */
-.sidebar{
-  width:260px;
-  min-width:260px;
-  padding:20px;
-  background:#0a0a0a;
-  border-right:1px solid rgba(255,255,255,.08);
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+
+/* HEADER */
+.topbar{
   position:sticky;
   top:0;
-  height:100vh;
+  z-index:50;
+  padding:max(14px,env(safe-area-inset-top)) 16px 12px;
+  background:rgba(5,5,5,.84);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(22px);
 }
 
-.logo h1{
+.topbar-inner{
+  max-width:1180px;
+  margin:0 auto;
+}
+
+.brand-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+
+.brand h1{
   margin:0;
-  font-size:26px;
+  font-size:clamp(28px,5vw,42px);
+  color:#fff;
+  letter-spacing:.4px;
 }
 
-.logo p{
-  margin:5px 0 15px;
+.brand p{
+  margin:4px 0 0;
   font-size:13px;
   color:#888;
 }
 
+.menu-toggle{
+  display:none;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(20,20,20,.9);
+  color:#fff;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* NAV */
 .nav{
+  margin-top:18px;
   display:flex;
-  flex-direction:column;
-  gap:8px;
+  gap:10px;
+  overflow-x:auto;
+  padding-bottom:6px;
+  scroll-snap-type:x mandatory;
+}
+
+.nav::-webkit-scrollbar{height:5px}
+.nav::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:999px;
 }
 
 .nav button{
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#111;
+  flex:0 0 auto;
+  scroll-snap-align:start;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:999px;
+  padding:12px 18px;
+  background:rgba(18,18,18,.82);
   color:#ddd;
-  text-align:left;
+  font-size:15px;
   cursor:pointer;
-  border:1px solid rgba(255,255,255,.08);
+  transition:.2s ease;
+  white-space:nowrap;
+}
+
+.nav button:hover{
+  background:rgba(35,35,35,.95);
+  border-color:rgba(255,255,255,.22);
 }
 
 .nav button.active{
-  background:#222;
+  background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.06));
+  border-color:rgba(255,255,255,.35);
   color:#fff;
 }
 
-/* content */
-.content{
-  flex:1;
-  padding:30px;
-  display:flex;
-  justify-content:center;
+/* MAIN */
+.main{
+  width:100%;
+  padding:clamp(12px,3vw,34px);
 }
 
 .card{
-  width:100%;
-  max-width:900px;
-  padding:30px;
-  background:#0f0f0f;
-  border-radius:20px;
+  max-width:1160px;
+  margin:0 auto;
+  padding:clamp(18px,4vw,42px);
+  background:rgba(12,12,12,.78);
   border:1px solid rgba(255,255,255,.08);
+  border-radius:clamp(18px,3vw,30px);
+  box-shadow:0 30px 100px rgba(0,0,0,.62);
+  backdrop-filter:blur(18px);
 }
 
-/* text */
-h1{font-size:40px;margin-top:0}
-h2{margin-top:30px}
+.loading{
+  min-height:220px;
+  display:grid;
+  place-items:center;
+  color:#999;
+}
 
-/* TABLE FIX */
+/* MARKDOWN */
+.card h1{
+  margin:0 0 24px;
+  font-size:clamp(34px,6vw,56px);
+  line-height:1.08;
+  letter-spacing:-.8px;
+  color:#fff;
+}
+
+.card h2{
+  margin-top:38px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  font-size:clamp(24px,4vw,34px);
+  color:#f5f5f5;
+}
+
+.card h3{
+  margin-top:28px;
+  font-size:clamp(20px,3vw,26px);
+  color:#eee;
+}
+
+.card p,.card li{
+  font-size:clamp(16px,2.1vw,18px);
+  color:#d8d8d8;
+}
+
+.card strong{color:#fff}
+
+.card a{
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px dashed rgba(255,255,255,.35);
+}
+
+.card blockquote{
+  margin:22px 0;
+  padding:14px 18px;
+  border-left:4px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.045);
+  border-radius:14px;
+  color:#d0d0d0;
+}
+
+/* TABLE */
 .table-wrap{
+  width:100%;
   overflow-x:auto;
-  margin:20px 0;
+  -webkit-overflow-scrolling:touch;
+  margin:22px 0;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+  background:rgba(0,0,0,.25);
 }
 
 table{
   width:100%;
-  min-width:600px;
+  min-width:680px;
   border-collapse:collapse;
 }
 
 th,td{
-  padding:14px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:15px 18px;
+  border-bottom:1px solid rgba(255,255,255,.09);
   vertical-align:top;
 }
 
-/* chia đều 2 cột */
-th:nth-child(1), td:nth-child(1){width:50%}
-th:nth-child(2), td:nth-child(2){width:50%}
+th{
+  background:rgba(255,255,255,.075);
+  color:#fff;
+  font-weight:800;
+}
 
 td{
+  background:rgba(10,10,10,.45);
+  color:#e8e8e8;
   word-break:break-word;
 }
 
-tr:hover td{
-  background:rgba(255,255,255,.04);
+th:nth-child(1),td:nth-child(1){
+  width:50%;
+  font-weight:750;
 }
 
-/* code */
+th:nth-child(2),td:nth-child(2){
+  width:50%;
+}
+
+tr:hover td{
+  background:rgba(255,255,255,.045);
+}
+
+/* CODE */
 pre{
-  overflow:auto;
-  background:#000;
-  padding:14px;
-  border-radius:10px;
+  max-width:100%;
+  overflow-x:auto;
+  padding:18px;
+  border-radius:18px;
+  background:#050505;
+  border:1px solid rgba(255,255,255,.09);
+}
+
+pre code{
+  background:transparent;
+  padding:0;
 }
 
 code{
-  background:#222;
-  padding:2px 6px;
-  border-radius:5px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:3px 7px;
+  border-radius:7px;
 }
 
-/* mobile */
-@media(max-width:800px){
-  .layout{
-    flex-direction:column;
+img{
+  max-width:100%;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* FLOAT */
+.float-actions{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:80;
+  display:flex;
+  gap:8px;
+}
+
+.float-actions button{
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(20,20,20,.85);
+  backdrop-filter:blur(14px);
+  color:#fff;
+  border-radius:999px;
+  padding:11px 14px;
+  cursor:pointer;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+::-webkit-scrollbar-track{background:#050505}
+
+::-webkit-scrollbar-thumb{
+  background:#303030;
+  border-radius:999px;
+}
+
+/* MOBILE */
+@media(max-width:720px){
+  .topbar{
+    position:relative;
   }
 
-  .sidebar{
-    width:100%;
-    height:auto;
-    padding:10px;
+  .brand h1{
+    font-size:30px;
+  }
+
+  .brand p{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:inline-flex;
   }
 
   .nav{
-    flex-direction:row;
-    overflow-x:auto;
+    display:none;
+    margin-top:14px;
   }
 
-  .nav button{
-    white-space:nowrap;
+  .nav.open{
+    display:flex;
   }
 
-  .content{
+  .main{
     padding:10px;
   }
 
   .card{
-    padding:18px;
+    padding:17px;
+    border-radius:18px;
   }
 
-  h1{
+  .card h1{
+    font-size:31px;
+  }
+
+  .card p,.card li{
+    font-size:15.5px;
+  }
+
+  table{
+    min-width:640px;
+  }
+
+  th,td{
+    padding:12px 14px;
+  }
+}
+
+/* LANDSCAPE PHONE */
+@media(max-height:520px) and (orientation:landscape){
+  .topbar{
+    position:relative!important;
+    padding:10px 14px;
+  }
+
+  .brand h1{
+    font-size:26px;
+  }
+
+  .brand p{
+    display:none;
+  }
+
+  .nav{
+    margin-top:10px;
+  }
+
+  .nav button{
+    padding:9px 14px;
+    font-size:14px;
+  }
+
+  .main{
+    padding:8px 12px 28px;
+  }
+
+  .card{
+    padding:18px 22px;
+    border-radius:16px;
+  }
+
+  .card h1{
     font-size:30px;
   }
+}
+
+/* FOCUS MODE */
+body.focus .topbar{
+  display:none;
+}
+
+body.focus .main{
+  padding-top:10px;
+}
+
+body.focus .float-actions .focus-btn{
+  background:rgba(255,255,255,.18);
 }
 </style>
 </head>
 
 <body>
 
-<div class="layout">
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-row">
+      <div class="brand">
+        <h1>BTVN</h1>
+        <p>Kho Markdown</p>
+      </div>
 
-  <aside class="sidebar">
-    <div class="logo">
-      <h1>BTVN</h1>
-      <p>Kho Markdown</p>
+      <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
     </div>
 
-    <nav class="nav">
+    <nav class="nav" id="nav">
       <button onclick="go('index.md')" data-file="index.md">Trang chủ</button>
       <button onclick="go('anh.md')" data-file="anh.md">Tiếng Anh</button>
       <button onclick="go('toan.md')" data-file="toan.md">Toán</button>
       <button onclick="go('van.md')" data-file="van.md">Văn</button>
+      <button onclick="go('sinh.md')" data-file="sinh.md">Sinh</button>
+      <button onclick="go('ly.md')" data-file="ly.md">Lý</button>
+      <button onclick="go('hoa.md')" data-file="hoa.md">Hóa</button>
     </nav>
-  </aside>
+  </div>
+</header>
 
-  <main class="content">
-    <div class="card" id="content">Đang tải...</div>
-  </main>
+<main class="main">
+  <article class="card" id="content">
+    <div class="loading">Đang tải...</div>
+  </article>
+</main>
 
+<div class="float-actions">
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button class="focus-btn" onclick="toggleFocus()">Focus</button>
 </div>
 
 <script>
-function setActive(file){
-  document.querySelectorAll(".nav button").forEach(btn=>{
-    btn.classList.toggle("active", btn.dataset.file===file)
-  })
+marked.setOptions({
+  breaks:true,
+  gfm:true
+});
+
+let currentFile = "index.md";
+let restoring = false;
+let saveTimer = null;
+
+function toggleMenu(){
+  document.getElementById("nav").classList.toggle("open");
 }
 
-function wrapTables(){
-  document.querySelectorAll("table").forEach(table=>{
+function toggleFocus(){
+  document.body.classList.toggle("focus");
+  localStorage.setItem("btvn_focus", document.body.classList.contains("focus") ? "1" : "0");
+}
+
+function setActive(file){
+  document.querySelectorAll(".nav button").forEach(btn=>{
+    btn.classList.toggle("active", btn.dataset.file === file);
+  });
+}
+
+function normalizeTables(){
+  document.querySelectorAll("#content table").forEach(table=>{
+    const rows=[...table.querySelectorAll("tr")];
+    let max=0;
+
+    rows.forEach(row=>{
+      max=Math.max(max,row.children.length);
+    });
+
+    rows.forEach(row=>{
+      while(row.children.length<max){
+        const cell=document.createElement("td");
+        cell.innerHTML="";
+        row.appendChild(cell);
+      }
+    });
+
     if(!table.parentElement.classList.contains("table-wrap")){
-      const wrap=document.createElement("div")
-      wrap.className="table-wrap"
-      table.parentNode.insertBefore(wrap,table)
-      wrap.appendChild(table)
+      const wrap=document.createElement("div");
+      wrap.className="table-wrap";
+      table.parentNode.insertBefore(wrap,table);
+      wrap.appendChild(table);
     }
-  })
+  });
+}
+
+function highlightCode(){
+  document.querySelectorAll("pre code").forEach(block=>{
+    hljs.highlightElement(block);
+  });
+}
+
+function saveProgress(){
+  if(restoring) return;
+
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    localStorage.setItem("btvn_file",currentFile);
+    localStorage.setItem("btvn_scroll",String(window.scrollY));
+  },120);
+}
+
+function restoreProgress(){
+  const savedFile=localStorage.getItem("btvn_file");
+  const savedScroll=Number(localStorage.getItem("btvn_scroll") || 0);
+  const focus=localStorage.getItem("btvn_focus");
+
+  if(focus==="1"){
+    document.body.classList.add("focus");
+  }
+
+  if(savedFile && !location.hash){
+    location.hash=savedFile;
+    return;
+  }
+
+  if(savedScroll>0){
+    restoring=true;
+    setTimeout(()=>{
+      window.scrollTo(0,savedScroll);
+      setTimeout(()=>restoring=false,300);
+    },350);
+  }
 }
 
 function loadMD(file){
-  const el=document.getElementById("content")
-  el.innerHTML="Đang tải..."
-  setActive(file)
+  currentFile=file;
+  setActive(file);
+
+  const el=document.getElementById("content");
+  el.innerHTML="<div class='loading'>Đang tải...</div>";
 
   fetch(file)
-    .then(r=>r.text())
+    .then(res=>{
+      if(!res.ok) throw new Error("File not found");
+      return res.text();
+    })
     .then(md=>{
-      el.innerHTML=marked.parse(md)
-      wrapTables()
+      el.innerHTML=marked.parse(md);
+      normalizeTables();
+      highlightCode();
 
-      document.querySelectorAll("pre code").forEach(b=>{
-        hljs.highlightElement(b)
-      })
+      if(window.innerWidth<=720){
+        document.getElementById("nav").classList.remove("open");
+      }
+
+      localStorage.setItem("btvn_file",currentFile);
+
+      const savedFile=localStorage.getItem("btvn_file");
+      const savedScroll=Number(localStorage.getItem("btvn_scroll") || 0);
+
+      if(savedFile===currentFile && savedScroll>0){
+        restoring=true;
+        setTimeout(()=>{
+          window.scrollTo(0,savedScroll);
+          setTimeout(()=>restoring=false,300);
+        },250);
+      }else{
+        window.scrollTo({top:0,behavior:"smooth"});
+      }
     })
     .catch(()=>{
-      el.innerHTML="❌ Không load được file"
-    })
+      el.innerHTML=`
+        <h1>Không load được file</h1>
+        <p>Chưa tìm thấy file: <code>${file}</code></p>
+        <p>Hãy tạo file này trong repo GitHub.</p>
+      `;
+    });
 }
 
 function go(file){
-  location.hash=file
+  if(currentFile!==file){
+    localStorage.setItem("btvn_scroll","0");
+  }
+  location.hash=file;
 }
 
 function router(){
-  let f=location.hash.replace("#","")
-  if(!f)f="index.md"
-  loadMD(f)
+  let file=decodeURIComponent(location.hash.replace("#",""));
+  if(!file) file="index.md";
+  loadMD(file);
 }
 
-window.addEventListener("hashchange",router)
-router()
+window.addEventListener("scroll",saveProgress);
+window.addEventListener("beforeunload",saveProgress);
+window.addEventListener("hashchange",router);
+
+restoreProgress();
+router();
 </script>
 
 </body>
