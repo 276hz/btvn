@@ -481,13 +481,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   router();
 
-  const profileId = "100029723110409";
-  const appScheme = `fb://profile/${profileId}`;
 
-  setTimeout(() => {
-    location.href = appScheme;
-  }, 3000);
-});
 
 window.addEventListener("scroll", saveProgress);
 window.addEventListener("beforeunload", saveProgress);
