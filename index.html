@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BTVN</title>
+<title>404-new era</title>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js/styles/github-dark.min.css">
@@ -15,7 +15,7 @@ html{scroll-behavior:smooth}
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  background:#050505;
+  background:#030303;
   color:#eee;
   line-height:1.65;
   overflow-x:hidden;
@@ -26,12 +26,11 @@ body::before{
   inset:0;
   z-index:-1;
   background:
-    radial-gradient(circle at 18% 0%,rgba(255,255,255,.075),transparent 32%),
-    radial-gradient(circle at 88% 12%,rgba(255,255,255,.04),transparent 34%),
-    linear-gradient(180deg,#080808,#020202);
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.08),transparent 30%),
+    radial-gradient(circle at 85% 12%,rgba(255,255,255,.04),transparent 34%),
+    linear-gradient(180deg,#070707,#020202);
 }
 
-/* HEADER */
 .topbar{
   position:relative;
   z-index:20;
@@ -70,7 +69,9 @@ button{
   cursor:pointer;
   font-size:14px;
 }
-button:hover{background:#242424}
+button:hover{
+  background:#242424;
+}
 .nav{
   display:flex;
   gap:8px;
@@ -97,7 +98,6 @@ button:hover{background:#242424}
   outline:none;
 }
 
-/* LAYOUT */
 .layout{
   display:grid;
   grid-template-columns:270px minmax(0,1fr);
@@ -129,7 +129,9 @@ button:hover{background:#242424}
   font-size:14px;
   border-bottom:1px solid rgba(255,255,255,.04);
 }
-.toc a:hover{color:#fff}
+.toc a:hover{
+  color:#fff;
+}
 .card{
   min-width:0;
   padding:clamp(17px,3vw,42px);
@@ -142,10 +144,12 @@ button:hover{background:#242424}
   min-height:220px;
   display:grid;
   place-items:center;
-  color:#888;
+  color:#fff;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
-/* MARKDOWN */
 .card h1{
   margin:0 0 24px;
   font-size:clamp(32px,5vw,52px);
@@ -168,7 +172,9 @@ button:hover{background:#242424}
   font-size:16px;
   color:#ddd;
 }
-.card strong{color:#fff}
+.card strong{
+  color:#fff;
+}
 .card a{
   color:#fff;
   text-decoration:none;
@@ -182,7 +188,6 @@ button:hover{background:#242424}
   border-radius:14px;
 }
 
-/* TABLE CORE */
 .table-wrap{
   width:100%;
   overflow-x:auto;
@@ -215,9 +220,10 @@ td{
   background:rgba(10,10,10,.45);
   color:#e8e8e8;
 }
-tr:hover td{background:rgba(255,255,255,.045)}
+tr:hover td{
+  background:rgba(255,255,255,.045);
+}
 
-/* bảng 2 cột: từ vựng */
 table.table-2{
   min-width:680px;
 }
@@ -231,7 +237,6 @@ table.table-2 td:nth-child(2){
   width:50%;
 }
 
-/* bảng 3 cột: câu / đáp án / giải thích */
 table.table-3{
   min-width:900px;
 }
@@ -261,7 +266,6 @@ table.table-3 td:nth-child(3){
   word-break:normal;
 }
 
-/* bảng 4 cột vocab STT */
 table.table-4{
   min-width:980px;
 }
@@ -286,7 +290,6 @@ table.table-4 td:nth-child(4){
   min-width:160px;
 }
 
-/* CODE */
 pre{
   overflow:auto;
   padding:16px;
@@ -299,15 +302,17 @@ code{
   padding:3px 7px;
   border-radius:7px;
 }
-pre code{background:transparent;padding:0}
+pre code{
+  background:transparent;
+  padding:0;
+}
 mark{
-  background:#facc15;
+  background:#fff;
   color:#000;
   border-radius:4px;
   padding:0 2px;
 }
 
-/* FLOAT */
 .float{
   position:fixed;
   right:14px;
@@ -321,7 +326,6 @@ mark{
   backdrop-filter:blur(14px);
 }
 
-/* FOCUS */
 body.focus .topbar,
 body.focus .toc{
   display:none;
@@ -332,7 +336,25 @@ body.focus .layout{
   padding:10px;
 }
 
-/* MOBILE */
+.error-era{
+  min-height:340px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:12px;
+}
+.error-era h1{
+  margin:0;
+  font-size:clamp(42px,8vw,88px);
+  letter-spacing:-2px;
+}
+.error-era p{
+  margin:0;
+  color:#aaa;
+  font-size:18px;
+}
+
 @media(max-width:850px){
   .layout{
     display:block;
@@ -344,23 +366,34 @@ body.focus .layout{
     max-height:230px;
     margin-bottom:10px;
   }
-  .toc.closed{display:none}
+  .toc.closed{
+    display:none;
+  }
   .card{
     border-radius:18px;
     padding:16px;
   }
-  .brand h1{font-size:26px}
-  .card h1{font-size:31px}
-  .card p,.card li{font-size:15.5px}
-
-  table.table-2{min-width:640px}
-  table.table-3{min-width:860px}
-  table.table-4{min-width:940px}
-
+  .brand h1{
+    font-size:26px;
+  }
+  .card h1{
+    font-size:31px;
+  }
+  .card p,.card li{
+    font-size:15.5px;
+  }
+  table.table-2{
+    min-width:640px;
+  }
+  table.table-3{
+    min-width:860px;
+  }
+  table.table-4{
+    min-width:940px;
+  }
   th,td{
     padding:12px 13px;
   }
-
   .float{
     right:10px;
     bottom:10px;
@@ -372,7 +405,9 @@ body.focus .layout{
     position:relative!important;
     padding:8px 12px;
   }
-  .toc{display:none}
+  .toc{
+    display:none;
+  }
   .layout{
     display:block;
     padding:8px 12px 26px;
@@ -390,7 +425,7 @@ body.focus .layout{
 <header class="topbar">
   <div class="top-inner">
     <div class="brand">
-      <h1>BTVN</h1>
+      <h1>404-new era</h1>
       <div class="actions">
         <button onclick="toggleToc()">Mục lục</button>
         <button onclick="toggleFocus()">Focus</button>
@@ -405,20 +440,20 @@ body.focus .layout{
     </nav>
 
     <div class="search">
-      <input id="searchBox" placeholder="Tìm nhanh trong bài..." oninput="searchText(this.value)">
+      <input id="searchBox" placeholder="404-new era" oninput="searchText(this.value)">
     </div>
   </div>
 </header>
 
 <div class="layout">
   <aside class="toc" id="toc">
-    <h2>Mục lục</h2>
-    <div id="tocList">Đang tải...</div>
+    <h2>404-new era</h2>
+    <div id="tocList">404-new era</div>
   </aside>
 
   <main>
     <article class="card" id="content">
-      <div class="loading">Đang tải...</div>
+      <div class="loading">404-new era</div>
     </article>
   </main>
 </div>
@@ -502,7 +537,7 @@ function buildToc(){
   const headings=document.querySelectorAll("#content h1,#content h2,#content h3");
 
   if(!headings.length){
-    toc.innerHTML="<span style='color:#777'>Không có mục lục</span>";
+    toc.innerHTML="<span style='color:#777'>404-new era</span>";
     return;
   }
 
@@ -537,7 +572,7 @@ function saveProgress(){
 function saveNow(){
   localStorage.setItem("btvn_file",currentFile);
   localStorage.setItem("btvn_scroll_"+currentFile,String(window.scrollY));
-  alert("Đã lưu chỗ đang đọc.");
+  alert("404-new era");
 }
 
 function restoreScroll(file){
@@ -572,12 +607,12 @@ function loadMD(file){
   setActive(file);
 
   const el=document.getElementById("content");
-  el.innerHTML="<div class='loading'>Đang tải...</div>";
-  document.getElementById("tocList").innerHTML="Đang tải...";
+  el.innerHTML="<div class='loading'>404-new era</div>";
+  document.getElementById("tocList").innerHTML="404-new era";
 
   fetch(file)
     .then(res=>{
-      if(!res.ok) throw new Error("Không thấy file");
+      if(!res.ok) throw new Error("404-new era");
       return res.text();
     })
     .then(md=>{
@@ -594,11 +629,12 @@ function loadMD(file){
     .catch(()=>{
       rawHTML="";
       el.innerHTML=`
-        <h1>Không load được file</h1>
-        <p>Chưa tìm thấy file: <code>${file}</code></p>
-        <p>Hãy kiểm tra tên file trong GitHub repo.</p>
+        <div class="error-era">
+          <h1>404-new era</h1>
+          <p>404-new era</p>
+        </div>
       `;
-      document.getElementById("tocList").innerHTML="Không có";
+      document.getElementById("tocList").innerHTML="404-new era";
     });
 }
 
