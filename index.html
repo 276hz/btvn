@@ -26,21 +26,22 @@ body::before{
   inset:0;
   z-index:-1;
   background:
-    radial-gradient(circle at 20% 0%,rgba(255,255,255,.08),transparent 30%),
-    radial-gradient(circle at 90% 10%,rgba(255,255,255,.04),transparent 35%),
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.075),transparent 32%),
+    radial-gradient(circle at 88% 12%,rgba(255,255,255,.04),transparent 34%),
     linear-gradient(180deg,#080808,#020202);
 }
 
+/* HEADER */
 .topbar{
   position:relative;
   z-index:20;
   padding:14px 14px 10px;
-  background:rgba(5,5,5,.88);
+  background:rgba(5,5,5,.9);
   border-bottom:1px solid rgba(255,255,255,.08);
   backdrop-filter:blur(18px);
 }
 .top-inner{
-  max-width:1280px;
+  max-width:1320px;
   margin:0 auto;
 }
 .brand{
@@ -53,6 +54,7 @@ body::before{
   margin:0;
   font-size:30px;
   color:#fff;
+  letter-spacing:.3px;
 }
 .actions{
   display:flex;
@@ -66,9 +68,9 @@ button{
   border-radius:999px;
   padding:9px 13px;
   cursor:pointer;
+  font-size:14px;
 }
-button:hover{background:#222}
-
+button:hover{background:#242424}
 .nav{
   display:flex;
   gap:8px;
@@ -81,16 +83,12 @@ button:hover{background:#222}
 }
 .nav button.active{
   background:rgba(255,255,255,.16);
-  border-color:rgba(255,255,255,.32);
+  border-color:rgba(255,255,255,.34);
   color:#fff;
-}
-
-.search{
-  width:100%;
-  margin-top:10px;
 }
 .search input{
   width:100%;
+  margin-top:10px;
   padding:12px 14px;
   border-radius:14px;
   border:1px solid rgba(255,255,255,.1);
@@ -99,15 +97,15 @@ button:hover{background:#222}
   outline:none;
 }
 
+/* LAYOUT */
 .layout{
   display:grid;
-  grid-template-columns:260px minmax(0,1fr);
+  grid-template-columns:270px minmax(0,1fr);
   gap:18px;
-  max-width:1280px;
+  max-width:1320px;
   margin:0 auto;
   padding:18px;
 }
-
 .toc{
   position:sticky;
   top:12px;
@@ -122,7 +120,6 @@ button:hover{background:#222}
 .toc h2{
   margin:0 0 12px;
   font-size:16px;
-  color:#fff;
 }
 .toc a{
   display:block;
@@ -133,16 +130,14 @@ button:hover{background:#222}
   border-bottom:1px solid rgba(255,255,255,.04);
 }
 .toc a:hover{color:#fff}
-
 .card{
   min-width:0;
-  padding:clamp(17px,3vw,40px);
+  padding:clamp(17px,3vw,42px);
   background:rgba(12,12,12,.78);
   border:1px solid rgba(255,255,255,.08);
   border-radius:24px;
-  box-shadow:0 30px 100px rgba(0,0,0,.6);
+  box-shadow:0 30px 100px rgba(0,0,0,.62);
 }
-
 .loading{
   min-height:220px;
   display:grid;
@@ -150,6 +145,7 @@ button:hover{background:#222}
   color:#888;
 }
 
+/* MARKDOWN */
 .card h1{
   margin:0 0 24px;
   font-size:clamp(32px,5vw,52px);
@@ -172,13 +168,21 @@ button:hover{background:#222}
   font-size:16px;
   color:#ddd;
 }
+.card strong{color:#fff}
 .card a{
   color:#fff;
   text-decoration:none;
   border-bottom:1px dashed rgba(255,255,255,.35);
 }
-.card strong{color:#fff}
+.card blockquote{
+  margin:22px 0;
+  padding:14px 18px;
+  border-left:4px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.045);
+  border-radius:14px;
+}
 
+/* TABLE CORE */
 .table-wrap{
   width:100%;
   overflow-x:auto;
@@ -190,30 +194,99 @@ button:hover{background:#222}
 }
 table{
   width:100%;
-  min-width:720px;
   border-collapse:collapse;
+  table-layout:auto;
 }
 th,td{
   padding:13px 15px;
   border-bottom:1px solid rgba(255,255,255,.08);
   vertical-align:top;
+  white-space:normal;
+  word-break:normal;
+  overflow-wrap:break-word;
+  line-height:1.6;
 }
 th{
   background:rgba(255,255,255,.08);
   color:#fff;
+  font-weight:800;
 }
 td{
   background:rgba(10,10,10,.45);
   color:#e8e8e8;
-  word-break:break-word;
 }
-th:nth-child(1),td:nth-child(1){
-  width:50%;
-  font-weight:700;
-}
-th:nth-child(2),td:nth-child(2){width:50%}
 tr:hover td{background:rgba(255,255,255,.045)}
 
+/* bảng 2 cột: từ vựng */
+table.table-2{
+  min-width:680px;
+}
+table.table-2 th:nth-child(1),
+table.table-2 td:nth-child(1){
+  width:50%;
+  font-weight:750;
+}
+table.table-2 th:nth-child(2),
+table.table-2 td:nth-child(2){
+  width:50%;
+}
+
+/* bảng 3 cột: câu / đáp án / giải thích */
+table.table-3{
+  min-width:900px;
+}
+table.table-3 th:nth-child(1),
+table.table-3 td:nth-child(1){
+  width:70px;
+  min-width:70px;
+  max-width:90px;
+  text-align:center;
+  white-space:nowrap;
+}
+table.table-3 th:nth-child(2),
+table.table-3 td:nth-child(2){
+  width:90px;
+  min-width:90px;
+  max-width:120px;
+  text-align:center;
+  white-space:nowrap;
+  font-weight:800;
+}
+table.table-3 th:nth-child(3),
+table.table-3 td:nth-child(3){
+  min-width:520px;
+  width:auto;
+  text-align:left;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+
+/* bảng 4 cột vocab STT */
+table.table-4{
+  min-width:980px;
+}
+table.table-4 th:nth-child(1),
+table.table-4 td:nth-child(1){
+  width:70px;
+  min-width:70px;
+  text-align:center;
+  white-space:nowrap;
+}
+table.table-4 th:nth-child(2),
+table.table-4 td:nth-child(2){
+  min-width:260px;
+  font-weight:750;
+}
+table.table-4 th:nth-child(3),
+table.table-4 td:nth-child(3){
+  min-width:300px;
+}
+table.table-4 th:nth-child(4),
+table.table-4 td:nth-child(4){
+  min-width:160px;
+}
+
+/* CODE */
 pre{
   overflow:auto;
   padding:16px;
@@ -227,7 +300,6 @@ code{
   border-radius:7px;
 }
 pre code{background:transparent;padding:0}
-
 mark{
   background:#facc15;
   color:#000;
@@ -235,6 +307,7 @@ mark{
   padding:0 2px;
 }
 
+/* FLOAT */
 .float{
   position:fixed;
   right:14px;
@@ -248,16 +321,18 @@ mark{
   backdrop-filter:blur(14px);
 }
 
+/* FOCUS */
 body.focus .topbar,
 body.focus .toc{
   display:none;
 }
 body.focus .layout{
   display:block;
-  max-width:1100px;
+  max-width:1180px;
   padding:10px;
 }
 
+/* MOBILE */
 @media(max-width:850px){
   .layout{
     display:block;
@@ -266,21 +341,29 @@ body.focus .layout{
   .toc{
     position:relative;
     top:0;
-    max-height:220px;
+    max-height:230px;
     margin-bottom:10px;
   }
-  .toc.closed{
-    display:none;
-  }
+  .toc.closed{display:none}
   .card{
     border-radius:18px;
     padding:16px;
   }
-  table{
-    min-width:680px;
+  .brand h1{font-size:26px}
+  .card h1{font-size:31px}
+  .card p,.card li{font-size:15.5px}
+
+  table.table-2{min-width:640px}
+  table.table-3{min-width:860px}
+  table.table-4{min-width:940px}
+
+  th,td{
+    padding:12px 13px;
   }
-  .brand h1{
-    font-size:26px;
+
+  .float{
+    right:10px;
+    bottom:10px;
   }
 }
 
@@ -289,9 +372,7 @@ body.focus .layout{
     position:relative!important;
     padding:8px 12px;
   }
-  .toc{
-    display:none;
-  }
+  .toc{display:none}
   .layout{
     display:block;
     padding:8px 12px 26px;
@@ -353,7 +434,6 @@ marked.setOptions({ breaks:true, gfm:true });
 let currentFile = "index.md";
 let rawHTML = "";
 let saveTimer = null;
-let restored = false;
 
 function slugify(text){
   return text
@@ -385,49 +465,57 @@ function toggleFocus(){
   localStorage.setItem("btvn_focus", document.body.classList.contains("focus") ? "1" : "0");
 }
 
-function wrapTables(){
+function normalizeTables(){
   document.querySelectorAll("#content table").forEach(table=>{
-    const rows = [...table.querySelectorAll("tr")];
-    let max = 0;
-
-    rows.forEach(row => max = Math.max(max, row.children.length));
+    const rows=[...table.querySelectorAll("tr")];
+    let max=0;
 
     rows.forEach(row=>{
-      while(row.children.length < max){
-        const td = document.createElement("td");
-        td.innerHTML = "";
+      max=Math.max(max,row.children.length);
+    });
+
+    rows.forEach(row=>{
+      while(row.children.length<max){
+        const td=document.createElement("td");
+        td.innerHTML="";
         row.appendChild(td);
       }
     });
 
+    table.classList.remove("table-2","table-3","table-4");
+
+    if(max===2) table.classList.add("table-2");
+    else if(max===3) table.classList.add("table-3");
+    else if(max===4) table.classList.add("table-4");
+
     if(!table.parentElement.classList.contains("table-wrap")){
-      const wrap = document.createElement("div");
-      wrap.className = "table-wrap";
-      table.parentNode.insertBefore(wrap, table);
+      const wrap=document.createElement("div");
+      wrap.className="table-wrap";
+      table.parentNode.insertBefore(wrap,table);
       wrap.appendChild(table);
     }
   });
 }
 
 function buildToc(){
-  const toc = document.getElementById("tocList");
-  const headings = document.querySelectorAll("#content h1, #content h2, #content h3");
+  const toc=document.getElementById("tocList");
+  const headings=document.querySelectorAll("#content h1,#content h2,#content h3");
 
   if(!headings.length){
-    toc.innerHTML = "<span style='color:#777'>Không có mục lục</span>";
+    toc.innerHTML="<span style='color:#777'>Không có mục lục</span>";
     return;
   }
 
-  toc.innerHTML = "";
+  toc.innerHTML="";
 
-  headings.forEach((h, i)=>{
-    const id = slugify(h.textContent) || "heading-" + i;
-    h.id = id;
+  headings.forEach((h,i)=>{
+    const id=slugify(h.textContent) || "heading-"+i;
+    h.id=id;
 
-    const a = document.createElement("a");
-    a.href = "#" + id;
-    a.textContent = h.textContent;
-    a.style.paddingLeft = h.tagName === "H3" ? "18px" : h.tagName === "H2" ? "8px" : "0";
+    const a=document.createElement("a");
+    a.href="#"+id;
+    a.textContent=h.textContent;
+    a.style.paddingLeft=h.tagName==="H3" ? "18px" : h.tagName==="H2" ? "8px" : "0";
     toc.appendChild(a);
   });
 }
@@ -440,55 +528,52 @@ function highlightCode(){
 
 function saveProgress(){
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(()=>{
-    localStorage.setItem("btvn_file", currentFile);
-    localStorage.setItem("btvn_scroll_" + currentFile, String(window.scrollY));
+  saveTimer=setTimeout(()=>{
+    localStorage.setItem("btvn_file",currentFile);
+    localStorage.setItem("btvn_scroll_"+currentFile,String(window.scrollY));
   },120);
 }
 
 function saveNow(){
-  localStorage.setItem("btvn_file", currentFile);
-  localStorage.setItem("btvn_scroll_" + currentFile, String(window.scrollY));
+  localStorage.setItem("btvn_file",currentFile);
+  localStorage.setItem("btvn_scroll_"+currentFile,String(window.scrollY));
   alert("Đã lưu chỗ đang đọc.");
 }
 
 function restoreScroll(file){
-  const y = Number(localStorage.getItem("btvn_scroll_" + file) || 0);
-  if(y > 0){
-    setTimeout(()=>window.scrollTo(0,y),300);
-  }else{
-    window.scrollTo(0,0);
-  }
+  const y=Number(localStorage.getItem("btvn_scroll_"+file) || 0);
+  setTimeout(()=>{
+    window.scrollTo(0,y || 0);
+  },300);
 }
 
 function searchText(q){
-  const content = document.getElementById("content");
-
+  const content=document.getElementById("content");
   if(!rawHTML) return;
 
   if(!q.trim()){
-    content.innerHTML = rawHTML;
-    wrapTables();
+    content.innerHTML=rawHTML;
+    normalizeTables();
     buildToc();
     highlightCode();
     return;
   }
 
-  const safe = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const reg = new RegExp(safe, "gi");
+  const safe=q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const reg=new RegExp(safe,"gi");
 
-  content.innerHTML = rawHTML.replace(reg, match => `<mark>${match}</mark>`);
-  wrapTables();
+  content.innerHTML=rawHTML.replace(reg,match=>`<mark>${match}</mark>`);
+  normalizeTables();
   buildToc();
 }
 
 function loadMD(file){
-  currentFile = file;
+  currentFile=file;
   setActive(file);
 
-  const el = document.getElementById("content");
-  el.innerHTML = "<div class='loading'>Đang tải...</div>";
-  document.getElementById("tocList").innerHTML = "Đang tải...";
+  const el=document.getElementById("content");
+  el.innerHTML="<div class='loading'>Đang tải...</div>";
+  document.getElementById("tocList").innerHTML="Đang tải...";
 
   fetch(file)
     .then(res=>{
@@ -496,40 +581,40 @@ function loadMD(file){
       return res.text();
     })
     .then(md=>{
-      rawHTML = marked.parse(md);
-      el.innerHTML = rawHTML;
+      rawHTML=marked.parse(md);
+      el.innerHTML=rawHTML;
 
-      wrapTables();
+      normalizeTables();
       buildToc();
       highlightCode();
 
-      localStorage.setItem("btvn_file", file);
+      localStorage.setItem("btvn_file",file);
       restoreScroll(file);
     })
     .catch(()=>{
-      rawHTML = "";
-      el.innerHTML = `
+      rawHTML="";
+      el.innerHTML=`
         <h1>Không load được file</h1>
         <p>Chưa tìm thấy file: <code>${file}</code></p>
         <p>Hãy kiểm tra tên file trong GitHub repo.</p>
       `;
-      document.getElementById("tocList").innerHTML = "Không có";
+      document.getElementById("tocList").innerHTML="Không có";
     });
 }
 
 function router(){
-  let file = decodeURIComponent(location.hash.replace("#",""));
+  let file=decodeURIComponent(location.hash.replace("#",""));
   if(!file){
-    file = localStorage.getItem("btvn_file") || "index.md";
-    location.hash = file;
+    file=localStorage.getItem("btvn_file") || "index.md";
+    location.hash=file;
     return;
   }
   loadMD(file);
 }
 
-window.addEventListener("scroll", saveProgress);
-window.addEventListener("beforeunload", saveProgress);
-window.addEventListener("hashchange", router);
+window.addEventListener("scroll",saveProgress);
+window.addEventListener("beforeunload",saveProgress);
+window.addEventListener("hashchange",router);
 
 if(localStorage.getItem("btvn_focus")==="1"){
   document.body.classList.add("focus");
